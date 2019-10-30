@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { INCREMENT, DECREMENT } from "./redux/actions/action-types";
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    const counter = useSelector((state: { counter: number }) => state.counter);
+    const dispatch = useDispatch();
+    const increment = () => dispatch({ type: INCREMENT });
+    const decrement = () => dispatch({ type: DECREMENT });
+    return (
+        <div className="App">
+            <h1>counter</h1>
+            <span>Counter Value: {counter}</span>
+            <button onClick={increment}>+</button>
+            <button onClick={decrement}>-</button>
+        </div>
+    );
+};
 
 export default App;
