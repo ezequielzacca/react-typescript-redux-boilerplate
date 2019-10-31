@@ -1,21 +1,16 @@
 import React from "react";
 import "./App.css";
-import { useSelector, useDispatch } from "react-redux";
-import { INCREMENT, DECREMENT } from "./redux/actions/action-types";
+import { ProfilePage } from "./Profile";
+import { ProfileContextProvider } from "./ProfileContextProvider";
+import { Profile } from "./interfaces/profile.interface";
 
-const App: React.FC = () => {
-    const counter = useSelector((state: { counter: number }) => state.counter);
-    const dispatch = useDispatch();
-    const increment = () => dispatch({ type: INCREMENT });
-    const decrement = () => dispatch({ type: DECREMENT });
+export const App: React.FC = () => {
+    const defaults: Partial<Profile> = {
+        title: "Designer"
+    };
     return (
-        <div className="App">
-            <h1>counter</h1>
-            <span>Counter Value: {counter}</span>
-            <button onClick={increment}>+</button>
-            <button onClick={decrement}>-</button>
-        </div>
+        <ProfileContextProvider defaults={defaults}>
+            <ProfilePage />
+        </ProfileContextProvider>
     );
 };
-
-export default App;
